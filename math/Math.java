@@ -28,13 +28,13 @@ class Math {
     //For AP we need to know: int, double, boolean
 
     //List examples of the types below and give definition
-    //int (integer):
+    //int (integer
     //double:
     //boolean:
 
     //For now we are just going to work with primitive
 
-    //Create 3 variables of each of the above types (USE GOOD CODING PRACTICE WHEN CREATING THE VARIABLES
+    //Create 3 variables of each of the above types (USE GOOD CODING PRACTICE WHEN CREATING THE VARIABLES)
 
 
 
@@ -55,9 +55,16 @@ class Math {
 
     //All multiples of 3 from 1 to 100
 
+for(int i=0; i<=100; i+=3)
+      {
+        System.out.println(i);
+      }
 
 
+    //Starting at 1000, print on the same line (with a - [hyphen] between each) all of the numbers that end in 0 going down to 0
 
-    //Starting at 1000, print on the same line (with a - [hypthen] between each) all of the numbers that end in 0 going down to 0
+  
+      
+
   }
 }
