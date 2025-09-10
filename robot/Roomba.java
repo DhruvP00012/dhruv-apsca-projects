@@ -11,7 +11,7 @@ public class Roomba implements Directions {
 
 		Roomba cleaner = new Roomba();
 		int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
-		System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");
+		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");
 
 	}
 
@@ -28,14 +28,44 @@ public class Roomba implements Directions {
 
 		World.readWorld(worldName);
 		World.setVisible(true);
-       	World.setSize(20, 20);
+       	//World.setSize(20, 20);
        	World.setDelay(1);
 
-		Robot roomba = new Robot(7, 7, East, 0);
-		int totalBeepers = 0;
+		roomba = new Robot(startX, startY, East, 0);
+		int count = 0;
+		int numPiles = 0; 
+		boolean end = true; 
+		while(end){
+			while(roomba.frontIsClear()){
+				roomba.move(); 
+				if(roomba.nextToABeeper() == true){
+					numPiles++; 
+				}
+				while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
 
-
-		roomba.move();
+				}
+	
+			}
+			if(roomba.facingEast() && !roomba.frontIsClear()){
+				roomba.turnLeft();
+				roomba.move(); 
+				roomba.turnLeft(); 
+			}
+			if(roomba.facingWest() && !roomba.frontIsClear()){
+				turnRight(roomba);
+				roomba.move(); 
+				turnRight(roomba); 
+			}
+			if(roomba.facingNorth() && !roomba.frontIsClear()){
+				end = false; 
+			}
+		} 
+		System.out.println("Total number of beepers: "+ count); 
+		System.out.println("Total number of piles = "+numPiles); 
+		return count;
+		/*
 		while(roomba.nextToABeeper())
 		{
 			roomba.pickBeeper();
@@ -123,6 +153,13 @@ public class Roomba implements Directions {
 
 
 		return totalBeepers;
+	*/
+	}
+
+	public static void turnRight(Robot roomba){
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.turnLeft();
 	}
 }
    
