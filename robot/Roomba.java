@@ -7,10 +7,10 @@ public class Roomba implements Directions {
 	// Main method to make this self-contained
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
-		String worldName = "robot/basicRoom.wld";
+		String worldName = "robot/finalTestWorld2024.wld";
 
 		Roomba cleaner = new Roomba();
-		int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
+		int totalBeepers = cleaner.cleanRoom(worldName, 26, 101);
 		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");
 
 	}
@@ -29,15 +29,22 @@ public class Roomba implements Directions {
 		World.readWorld(worldName);
 		World.setVisible(true);
        	//World.setSize(20, 20);
-       	World.setDelay(1);
+       	World.setDelay(0);
 
 		roomba = new Robot(startX, startY, East, 0);
 		int count = 0;
 		int numPiles = 0; 
+		int numSteps = 0;
 		boolean end = true; 
 		while(end){
+			while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
+
+				}
 			while(roomba.frontIsClear()){
 				roomba.move(); 
+				numSteps++;
 				if(roomba.nextToABeeper() == true){
 					numPiles++; 
 				}
@@ -49,13 +56,35 @@ public class Roomba implements Directions {
 	
 			}
 			if(roomba.facingEast() && !roomba.frontIsClear()){
+				while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
+
+				}
 				roomba.turnLeft();
 				roomba.move(); 
+				numSteps++;
+				while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
+
+				}
 				roomba.turnLeft(); 
 			}
 			if(roomba.facingWest() && !roomba.frontIsClear()){
+				while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
+
+				}
 				turnRight(roomba);
 				roomba.move(); 
+				numSteps++;
+				while(roomba.nextToABeeper()){
+					roomba.pickBeeper();
+					count++; 
+
+				}
 				turnRight(roomba); 
 			}
 			if(roomba.facingNorth() && !roomba.frontIsClear()){
@@ -63,7 +92,8 @@ public class Roomba implements Directions {
 			}
 		} 
 		System.out.println("Total number of beepers: "+ count); 
-		System.out.println("Total number of piles = "+numPiles); 
+		System.out.println("Total number of steps: "+numSteps);
+		System.out.println("Total number of piles = "+ numPiles); 
 		return count;
 		/*
 		while(roomba.nextToABeeper())
