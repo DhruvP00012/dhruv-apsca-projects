@@ -4,27 +4,21 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
-	// Main method to make this self-contained
 	public static void main(String[] args) {
-		// LEAVE THIS ALONE!!!!!!
 		String worldName = "robot/finalTestWorld2024.wld";
 
 		Roomba cleaner = new Roomba();
 		int totalBeepers = cleaner.cleanRoom(worldName, 26, 101);
-		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");
 
 	}
 
-	// declared here so it is visible in all the methods!
 	private Robot roomba;
 
-	// You will need to add many variables!!
 
 
 	public int cleanRoom(String worldName, int startX, int startY) {
 
-		// A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
-        // Make sure it starts at startX and startY location.
+	
 
 		World.readWorld(worldName);
 		World.setVisible(true);
@@ -91,99 +85,14 @@ public class Roomba implements Directions {
 				end = false; 
 			}
 		} 
-		System.out.println("Total number of beepers: "+ count); 
-		System.out.println("Total number of steps: "+numSteps);
-		System.out.println("Total number of piles = "+ numPiles); 
+		System.out.println("Total number of beepers: "+ count);
+		System.out.println("Dirty percentage: "+ (double)numPiles/numSteps +"%");
+		System.out.println("Average pile size: "+ (double)count/numPiles);
+		System.out.println("Area: "+numSteps);
+		System.out.println("Total number of piles: "+ numPiles); 
 		return count;
-		/*
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-		roomba.move();
-		roomba.move();
-		roomba.turnLeft();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-		roomba.turnLeft();
-		roomba.move();
-		roomba.move();
-		roomba.move();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
 		
-		roomba.turnLeft();
-		roomba.turnLeft();
-		roomba.turnLeft();
-		roomba.move();
-		roomba.turnLeft();
-		roomba.turnLeft();
-		roomba.turnLeft();
-		roomba.move();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-		roomba.turnLeft();
-		roomba.move();
-		roomba.turnLeft();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-		
-		roomba.turnLeft();
-		roomba.turnLeft();
-		roomba.move();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-		
-		roomba.move();
-		roomba.move();
-		roomba.move();
-		while(roomba.nextToABeeper())
-		{
-			roomba.pickBeeper();
-			totalBeepers ++;
-		}
-
-
-		return totalBeepers;
-	*/
+	
 	}
 
 	public static void turnRight(Robot roomba){
