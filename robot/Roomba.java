@@ -22,7 +22,6 @@ public class Roomba implements Directions {
 
 		World.readWorld(worldName);
 		World.setVisible(true);
-       	//World.setSize(20, 20);
        	World.setDelay(0);
 
 		roomba = new Robot(startX, startY, East, 0);
