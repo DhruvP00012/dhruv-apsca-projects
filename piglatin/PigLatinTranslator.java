@@ -1,13 +1,25 @@
 package piglatin;
 
 public class PigLatinTranslator {
-    public static Book translate(Book input) {
+    public static Book translate(Book input, String word) {
         Book translatedBook = new Book();
+      word = "";
+      String vowels = "AEIOUY";
+      String test = "a";
 
-        // TODO: Add code here to populate translatedBook with a translation of the
-        // input book.
-        // Curent do-nothing code will return an empty book.
-        // Your code will need to call translate(String input) many times.
+        if (vowels.indexOf(test) != -1)
+        {
+            System.out.println(test + " is a vowel.");
+        }
+
+
+      if (word.substring(0,1 ).equals(test))
+      {
+        return word + "ay";
+      }
+
+
+
 
         return translatedBook;
     }
@@ -31,10 +43,12 @@ public class PigLatinTranslator {
 
         String result = "";
 
-        // TODO: Replace this code to correctly translate a single word.
+        
+
         // Start here first!
         // This is the first place to work.
-        result = input; // delete this line
+        //result = input; // delete this line
+
 
         return result;
     }
