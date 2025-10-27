@@ -27,7 +27,7 @@ public class TestSuite {
         score += basicTest("clean-cut", "ean-cutclay");
 
         score += basicTest("", "");
-        score += basicTest("    ", "");
+        score += basicTest("    ", "    ");
 
         // Multiple words
         score += basicTest("pigs eat trash", "igspay eatay ashtray");
