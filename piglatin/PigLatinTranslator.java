@@ -1,6 +1,5 @@
 package piglatin;
 
-import java.lang.reflect.Method;
 import java.util.Scanner;
 
 public class PigLatinTranslator {
@@ -18,41 +17,52 @@ public class PigLatinTranslator {
 
 
     public static String translateWord(String input) {
+    if (input == null || input.isEmpty()) {
+        return "";
+    }
 
-        System.out.println("  -> translateWord('" + input + "')");
-        // .isUpperCase() .isLowerCase()
-        // .toUpperCase() .toLowerCase()
+    String originalInput = input;
+    String punctuation = "";
+    while (input.length() > 0 && !Character.isLetter(input.charAt(input.length() - 1))) {
+        punctuation = input.charAt(input.length() - 1) + punctuation;
+        input = input.substring(0, input.length() - 1);
+    }
+    
+    if (input.isEmpty()) {
+        return punctuation;
+    }
 
+    boolean wasCapitalized = Character.isUpperCase(originalInput.charAt(0));
+    String lowerCaseInput = input.toLowerCase();
+    String vowels = "aeiou";
 
-        input = input.toLowerCase();
-        if (input.length() == 0)
-        {
-            return "";
-        }
-        
-        char firstChar = input.charAt(0);
-        String vowels = "aeiouy" + "AEIOUY";
-        
-        if (vowels.indexOf(firstChar) != -1) {
-            return input + "way";
-        } else {
-            int firstVowelIndex = -1;
-            for (int i = 0; i < input.length(); i++) {
-                if (vowels.indexOf(input.charAt(i)) != -1) {
-                    firstVowelIndex = i;
-                    break;
-                }
-            }
-
-            if (firstVowelIndex != -1) {
-                String consonants = input.substring(0, firstVowelIndex);
-                String restOfWord = input.substring(firstVowelIndex);
-                return restOfWord + consonants + "ay";
-            } else {
-                return input + "ay";
-            }
+    int firstVowelIndex = -1;
+    for (int i = 0; i < lowerCaseInput.length(); i++) {
+        char currentChar = lowerCaseInput.charAt(i);
+        if (vowels.indexOf(currentChar) != -1 || (currentChar == 'y' && i > 0)) {
+            firstVowelIndex = i;
+            break;
         }
     }
+
+    String translatedWord;
+    if (firstVowelIndex == 0) {
+        translatedWord = lowerCaseInput + "ay";
+    } else if (firstVowelIndex != -1) {
+        String consonants = lowerCaseInput.substring(0, firstVowelIndex);
+        String restOfWord = lowerCaseInput.substring(firstVowelIndex);
+        translatedWord = restOfWord + consonants + "ay";
+    } else {
+        translatedWord = lowerCaseInput + "ay";
+    }
+    
+    if (wasCapitalized) {
+        translatedWord = Character.toUpperCase(translatedWord.charAt(0)) + translatedWord.substring(1);
+    }
+
+    return translatedWord + punctuation;
+}
+
 
 
     public static String translate(String input) {
@@ -63,7 +73,6 @@ public class PigLatinTranslator {
         // Start here first!
         // This is the first place to work.
         //result = input; // delete this line
-        // I like food.
        
 
         for (int i = 0; i < input.length(); i++) {
