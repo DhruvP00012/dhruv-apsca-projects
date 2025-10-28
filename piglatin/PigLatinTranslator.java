@@ -15,7 +15,6 @@ public class PigLatinTranslator {
 
     }
 
-
     public static String translateWord(String input) {
     if (input == null || input.isEmpty()) {
         return "";
