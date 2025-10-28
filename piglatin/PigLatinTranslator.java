@@ -21,23 +21,20 @@ public class PigLatinTranslator {
     }
 
     String originalInput = input;
-    String punctuation = "";
-    while (input.length() > 0 && !Character.isLetter(input.charAt(input.length() - 1))) {
-        punctuation = input.charAt(input.length() - 1) + punctuation;
-        input = input.substring(0, input.length() - 1);
-    }
+    // String punctuation = "";
+    // while (input.length() > 0 && !Character.isLetter(input.charAt(input.length() - 1))) {
+    //     punctuation = input.charAt(input.length() - 1) + punctuation;
+    //     input = input.substring(0, input.length() - 1);
+    // }
     
-    if (input.isEmpty()) {
-        return punctuation;
-    }
 
     boolean wasCapitalized = Character.isUpperCase(originalInput.charAt(0));
-    String lowerCaseInput = input.toLowerCase();
-    String vowels = "aeiou";
+    // String lowerCaseInput = input.toLowerCase();
+    String vowels = "aeiouy" + "AEIOUY";
 
     int firstVowelIndex = -1;
-    for (int i = 0; i < lowerCaseInput.length(); i++) {
-        char currentChar = lowerCaseInput.charAt(i);
+    for (int i = 0; i < originalInput.length(); i++) {
+        char currentChar = originalInput.charAt(i);
         if (vowels.indexOf(currentChar) != -1 || (currentChar == 'y' && i > 0)) {
             firstVowelIndex = i;
             break;
@@ -46,20 +43,20 @@ public class PigLatinTranslator {
 
     String translatedWord;
     if (firstVowelIndex == 0) {
-        translatedWord = lowerCaseInput + "ay";
+        translatedWord = originalInput + "ay";
     } else if (firstVowelIndex != -1) {
-        String consonants = lowerCaseInput.substring(0, firstVowelIndex);
-        String restOfWord = lowerCaseInput.substring(firstVowelIndex);
+        String consonants = originalInput.substring(0, 1).toLowerCase() + originalInput.substring(1, firstVowelIndex);
+        String restOfWord = originalInput.substring(firstVowelIndex);
         translatedWord = restOfWord + consonants + "ay";
     } else {
-        translatedWord = lowerCaseInput + "ay";
+        translatedWord = originalInput + "ay";
     }
     
     if (wasCapitalized) {
         translatedWord = Character.toUpperCase(translatedWord.charAt(0)) + translatedWord.substring(1);
     }
 
-    return translatedWord + punctuation;
+    return translatedWord;
 }
 
 
