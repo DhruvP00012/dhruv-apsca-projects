@@ -10,6 +10,10 @@ public class PigLatinTranslator {
         // input book.
         // Curent do-nothing code will return an empty book.
         // Your code will need to call translate(String input) many times.
+
+        for(int i = 0; i<input.getLineCount(); i++) {
+            translatedBook.appendLine(translate(input.getLine(i)));
+        }
         
         return translatedBook;
 

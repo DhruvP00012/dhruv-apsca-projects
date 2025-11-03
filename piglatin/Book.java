@@ -50,8 +50,12 @@ public class Book {
         // load a book from an input string.
         this.title = title;
 
-        // TODO: use Scanner to populate the book
-        // use: text.add(line) to add a line to the book.
+       Scanner input = new Scanner(string);
+       while (input.hasNextLine())
+       {
+        text.add(input.nextLine());
+       }
+       input.close();
     }
 
     public void readFromUrl(String title, String url) {
@@ -61,17 +65,32 @@ public class Book {
 
         try {
             URL bookUrl = URI.create(url).toURL();
-            // TODO: use Scanner to populate the book
-            // Scanner can open a file on a URL like this:
-            // Scanner(bookUrl.openStream())
-            // use: text.add(line) to add a line to the book.
+            Scanner scan = new Scanner(bookUrl.openStream());
+            while (scan.hasNextLine()) {
+                appendLine(scan.nextLine());
+            }
+            scan.close();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     void writeToFile(String name) {
-        // TODO: Add code here to write the contents of the book to a file.
-        // Must write to file using provided name.
+        PrintStream filePrintStream = null;
+        try {
+            filePrintStream = new PrintStream(name);
+            for(String str : text) {
+                filePrintStream.println(str);
+
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: File not found - " + e.getMessage());
+
+        }finally {
+            if (filePrintStream != null) {
+                filePrintStream.close();
+            }
+        }
     }
 }
