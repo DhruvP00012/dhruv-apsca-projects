@@ -32,6 +32,12 @@ public class Game {
     {
         player = new Hand(13);
         dealer = new Hand(13);
+        
+        if (deck.size() < 52) {
+            deck = new Deck();
+        }
+        deck.shuffle();
+
         deal();
     }
 
@@ -52,7 +58,6 @@ public class Game {
 
         System.out.println("Player - Score: " + score(player) + " Hand: " + player.toString());
         System.out.println("Dealer - Score: " + score(dealer) + " Hand: " + dealer.toString());
-
     }
 
     public boolean takeTurn(String action)
@@ -60,12 +65,11 @@ public class Game {
         Boolean standing = false;
         if (action.length() > 0)
         {
-            // Player's Turn
-            String command = action.substring(0, 1);
+            String command = action.substring(0, 1).toLowerCase();
             if (command.equals("h"))
             {
                 System.out.println("Hit");
-                Card card = deck.draw();
+                Card card = deck.draw(); 
                 player.add(card);
             }
             else if (command.equals("s"))
@@ -74,7 +78,6 @@ public class Game {
                 standing = true;
             }
 
-            // Evaluate Player's Score
             int playerScore = score(player);
             if (playerScore == 21)
             {
@@ -91,14 +94,12 @@ public class Game {
                 return false;
             }
 
-            // Dealer's Turn
-            if (score(dealer) < 17)
+            if (standing && score(dealer) < 17)
             {
-                Card card = deck.draw();
+                Card card = deck.draw(); 
                 dealer.add(card);
             }
 
-            // Evaluate Dealer's Score
             int dealerScore = score(dealer);
             if (dealerScore == 21)
             {
@@ -123,9 +124,12 @@ public class Game {
                     playersWins++;
                     System.out.println("Player wins!");
                 }
-                else {
+                else if (score(dealer) > score(player))
+                {
                     dealersWins++;
-                    System.out.println("Player wins!");
+                    System.out.println("Dealer wins!"); 
+                } else {
+                    System.out.println("It's a draw!");
                 }
                 printState();
                 return false;
@@ -140,18 +144,31 @@ public class Game {
     private int score(Hand hand)
     {
         int score = 0;
+        int aceCount = 0;
+
         for (int i=0; i<hand.length(); i++)
         {
             Card card = hand.get(i);
-            int value = card.getValue() + 1;
-            if (value > 10)
+            int value = card.getValue(); 
+            
+            if (value == 0) 
             {
-                value = 10;
+                aceCount++;
+                score += 11;
             }
-            // TODO: deal with aces
-            score += value;
+            else if (value >= 10) 
+            {
+                score += 10;
+            } else {
+                score += value + 1;
+            }
         }
+        
+        while (score > 21 && aceCount > 0) {
+            score -= 10;
+            aceCount--;
+        }
+
         return score;
     }
-
 }
