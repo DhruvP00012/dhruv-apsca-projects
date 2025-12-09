@@ -14,21 +14,22 @@ public class GameOfLife implements Board {
         }
     }
 
-    // Set values on the board
     public void set(int x, int y, int[][] data) {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[0].length; j++) {
-                board[i + x][j + y] = data[i][j];
+                if (i + x < board.length && j + y < board.length) {
+                    board[i + x][j + y] = data[i][j];
+                }
             }
         }
     }
 
-    // Run the simulation for a number of turns
     public void run(int turns) {
-        // call step the number of times requested
+        for (int i = 0; i < turns; i++) {
+            step();
+        }
     }
 
-    // Step the simulation forward one turn.
     public void step()
     {
         print();
