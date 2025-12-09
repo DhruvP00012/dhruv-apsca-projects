@@ -4,12 +4,14 @@ import java.util.Arrays;
 
 public class GameOfLife implements Board {
 
-    // Integers: 0 or 1 for alive or dead
     private int[][] board;
 
     public GameOfLife(int x, int y)
     {
-        // Construct a 2d array of the given x and y size.
+        this.board = new int[x][y];
+        for(int[] row : board) {
+            Arrays.fill(row, 0);
+        }
     }
 
     // Set values on the board
