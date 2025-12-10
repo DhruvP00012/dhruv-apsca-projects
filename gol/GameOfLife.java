@@ -66,23 +66,19 @@ public class GameOfLife implements Board {
         return count;
     }
 
-    // Get a value from the board with "wrap around"
-    // Locations outside the board will loop back into the board.
-    // Ex: -1 will read board.length-1
     public int get(int x, int y) {
         int xLimit = board.length;
-        int yLimit = board[0].length;
-        return board[(x + xLimit) % xLimit][(y + yLimit) % yLimit];
+        int yLimit = board.length;
+        int wrapX = (x % xLimit + xLimit) % xLimit;
+        int wrapY = (y % yLimit + yLimit) % yLimit;
+        return board[wrapX][wrapY];
     }
 
-    // Test helper to get the whole board state
     public int[][] get() {
         return board;
     }
 
-    // Test helper to print the current state
     public void print() {
-        // Print the header
         System.out.print("\n ");
         for (int y = 0; y < board[0].length; y++) {
             System.out.print(y % 10 + " ");
