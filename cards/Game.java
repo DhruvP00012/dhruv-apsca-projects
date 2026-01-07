@@ -12,7 +12,7 @@ public class Game {
     public Game(Deck deck)
     {
         this.deck = deck;
-        playersWins = 0;h
+        playersWins = 0;
         dealersWins = 0;
     }
 
