@@ -8,12 +8,13 @@ public class InsertionSort implements Sorter {
 
         for(int i = 1; i < n; i++) {
             int current = input[i];
-            int j;
+            int j = i;
 
-            for(j = i + 1; j >= 0 && input[j] > current; j--) {
-                input[j + 1] = input[j];
+            while (j > 0 && input[j - 1] > current) {
+                input[j]  = input[j - 1];
+                j--;
             }
-            input[j + 1] = current;
+            input[j] = current;
         }
     }
 }
