@@ -19,5 +19,9 @@ public class Main {
                }
            }
         System.out.print(sum1 + sum2 + sum3 +sum4);
+
+        public static int[] genRanArray (int size) {
+            
+        }
     }
 }
