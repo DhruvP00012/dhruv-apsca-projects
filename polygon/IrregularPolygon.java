@@ -1,5 +1,6 @@
 package polygon;
 
+import java.awt.Polygon;
 import java.awt.geom.*;
 import java.util.ArrayList;
 import gpdraw.*;
@@ -15,8 +16,16 @@ public class IrregularPolygon {
         myPolygon.add(aPoint);
     }
     public double perimeter() {
-        // TODO: Calculate the perimeter.
-        return 3.14;
+        if (myPolygon.size() < 2) {
+            return 0.0;
+        }
+        double perimeter = 0.0;
+        for (int i = 0; i < myPolygon.size(); i++) {
+            Point2D.Double current = myPolygon.get(i);
+            Point2D.Double next = myPolygon.get((i + 1) % myPolygon.size());
+            perimeter += current.distance(next);
+        }
+        return perimeter;
     }
 
     public double area() {
