@@ -1,24 +1,19 @@
 package polygon;
 
-import java.awt.geom.*; // for Point2D.Double
-import java.util.ArrayList; // for ArrayList
-import gpdraw.*; // for DrawingTool
+import java.awt.geom.*;
+import java.util.ArrayList;
+import gpdraw.*;
 
 public class IrregularPolygon {
-    private ArrayList<Point2D.Double> myPolygon = new ArrayList<Point2D.Double>();
+    private ArrayList<Point2D.Double> myPolygon;
 
-    // constructor
-    public IrregularPolygon(double point) {
-        
-    }
-    public IrregularPolygon() {}
-
-    // public methods
-    public void add(Point2D.Double aPoint)
-    {
-        // TODO: Add a point to the IrregularPolygon.
+    public IrregularPolygon() {
+        myPolygon = new ArrayList<Point2D.Double>();
     }
 
+    public void add(Point2D.Double aPoint) {
+        myPolygon.add(aPoint);
+    }
     public double perimeter() {
         // TODO: Calculate the perimeter.
         return 3.14;
