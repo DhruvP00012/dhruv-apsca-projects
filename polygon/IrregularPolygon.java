@@ -37,7 +37,7 @@ public class IrregularPolygon {
         for (int i = 0; i < myPolygon.size(); i++) {
             Point2D.Double one = myPolygon.get(i);
             Point2D.Double two = myPolygon.get((i + 1) % myPolygon.size());
-            sum = sum + (one.getX() * two.getX() - one.getY() * two.getY());
+            sum = sum + (one.getX() * two.getY() - one.getY() * two.getX());
         }
         return Math.abs(sum / 2.0);
     }
