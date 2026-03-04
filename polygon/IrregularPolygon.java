@@ -29,9 +29,16 @@ public class IrregularPolygon {
     }
 
     public double area() {
-        // TODO: Calculate the area.
-        Double area = 0.0;
-        return area;
+        if (myPolygon.size() < 3) {
+            return 0.0;
+        }
+        double sum = 0.0;
+        for (int i = 0; i < myPolygon.size(); i++) {
+            Point2D.Double one = myPolygon.get(i);
+            Point2D.Double two = myPolygon.get((i + 1) % myPolygon.size();
+            sum = sum + (one.getX() * two.getX() - one.getY() * two.getY());
+        }
+        return Math.abs(sum / 2.0);
     }
 
     public void draw()
