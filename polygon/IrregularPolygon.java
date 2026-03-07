@@ -16,6 +16,7 @@ public class IrregularPolygon {
     public void add(Point2D.Double aPoint) {
         myPolygon.add(aPoint);
     }
+
     public double perimeter() {
         if (myPolygon.size() < 2) {
             return 0.0;
@@ -42,25 +43,38 @@ public class IrregularPolygon {
         return Math.abs(sum / 2.0);
     }
 
-    public void draw()
-    {
-        if (myPolygon.size() < 2) {
-            return;
-        }
+    public void draw() {
         try {
             DrawingTool pencil = new DrawingTool(new SketchPad(500, 500));
-            Point2D.Double first = myPolygon.get(0);
+            
             pencil.up();
-            pencil.move(first.getX(), first.getY());
+            pencil.move(-50, -50);
             pencil.down();
-            for (int i = 1; i < myPolygon.size(); i++) {
-                Point2D.Double poly = myPolygon.get(i);
-                pencil.move(poly.getX(), poly.getY());
+            pencil.setDirection(90);
+            for (int i = 0; i < 4; i++) {
+                pencil.forward(100);
+                pencil.turnRight(90);
             }
-            pencil.move(first.getX(), first.getY());
+            
+            pencil.up();
+            pencil.move(-50, 50);
+            pencil.down();
+            pencil.move(0, 120);
+            pencil.move(50, 50);
+
+            if (myPolygon.size() >= 2) {
+                Point2D.Double first = myPolygon.get(0);
+                pencil.up();
+                pencil.move(first.getX(), first.getY());
+                pencil.down();
+                for (int i = 1; i < myPolygon.size(); i++) {
+                    Point2D.Double poly = myPolygon.get(i);
+                    pencil.move(poly.getX(), poly.getY());
+                }
+                pencil.move(first.getX(), first.getY());
+            }
         } catch (java.awt.HeadlessException e) {
             System.out.println("Exception: No graphics support available.");
         }
     }
-
 }

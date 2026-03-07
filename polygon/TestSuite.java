@@ -1,10 +1,9 @@
 package polygon;
 
-import java.awt.geom.*; // for Point2D.Double
+import java.awt.geom.*; 
 import java.util.Arrays;
 
 public class TestSuite {
-    // Run a bunch of basic tests on IrregularPolygon
     public static void run()
     {
         System.out.println("Starting TestSuite");
@@ -37,7 +36,6 @@ public class TestSuite {
         IrregularPolygon poly = new IrregularPolygon();
         for (double[] point : points)
         {
-            //System.out.println("  Adding point: " + Arrays.toString(point));
             poly.add(new Point2D.Double(point[0], point[1]));
         }
 
