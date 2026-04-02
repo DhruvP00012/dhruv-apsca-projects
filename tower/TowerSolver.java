@@ -5,13 +5,11 @@ public class TowerSolver {
 
     public TowerSolver()
     {
-        // Nothing to do here
     }
 
     public void solve(TowerModel model)
     {
         this.model = model;
-        // Call the missing solve method (not this one)
     }
 
     // Create an overloaded solve(...) method
