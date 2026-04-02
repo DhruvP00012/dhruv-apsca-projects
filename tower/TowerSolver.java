@@ -8,7 +8,7 @@ public class TowerSolver {
 
     public void solve(TowerModel model) {
         this.model = model;
-        solve(model.getHeight(), model.getTowers()[0], model.getTowers()[1], model.getTowers()[2]);
+        solve(model.getHeight(), model.getTowers()[0], model.getTowers()[2], model.getTowers()[1]);
     }
 
     private void solve(int n, IntegerStack from, IntegerStack to, IntegerStack aux) {
