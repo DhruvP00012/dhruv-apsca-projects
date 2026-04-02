@@ -10,6 +10,7 @@ public class TowerSolver {
     public void solve(TowerModel model)
     {
         this.model = model;
+        solve(model.getHeight(), model.getTowers()[0], model.getTowers()[1], model.getTowers()[2]);
     }
 
     // Create an overloaded solve(...) method
